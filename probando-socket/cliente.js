@@ -1,6 +1,5 @@
 const { io } = require("socket.io-client");
 
-// Conectarse al backend NestJS en localhost:3000 (ajustá si usás otro puerto)
 const socket = io("http://localhost:4000/");
 
 socket.on("connect", () => {
