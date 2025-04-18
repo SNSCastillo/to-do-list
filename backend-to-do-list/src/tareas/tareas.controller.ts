@@ -6,7 +6,7 @@ import { Auth } from 'src/auth/decorators/auth.decorator';
 import { Role } from 'src/common/enums/rol.enum';
 import { UserActiveInterface } from 'src/common/interfaces/user-active.interface';
 import { ActiveUser } from 'src/common/decorators/active-user.decorator';
-import { ApiBearerAuth, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
 
 @ApiBearerAuth()
 @ApiUnauthorizedResponse({
@@ -19,26 +19,37 @@ export class TareasController {
   constructor(private readonly tareasService: TareasService) { }
 
   @Post()
+  @ApiCreatedResponse({
+    description: 'Nueva tarea creado correctamente.',
+  })
   create(@Body() createTareaDto: CreateTareaDto, @ActiveUser() user: UserActiveInterface) {
     return this.tareasService.create(createTareaDto, user);
   }
 
   @Get()
+  @ApiOkResponse({
+    description: 'Todas las tareas del usuario.',
+  })
   findAll(@ActiveUser() user: UserActiveInterface) {
     return this.tareasService.findAll(user);
   }
 
   @Get(':id')
+  @ApiOkResponse({
+    description: 'Una tarea obtenida.',
+  })
   findOne(@Param('id') id: string, @ActiveUser() user: UserActiveInterface) {
     return this.tareasService.findOne(+id, user);
   }
 
   @Patch(':id')
+  @ApiOkResponse({ description: 'Usuario actualizado correctamente.' })
   update(@Param('id') id: string, @Body() updateTareaDto: UpdateTareaDto, @ActiveUser() user: UserActiveInterface) {
     return this.tareasService.update(+id, updateTareaDto, user);
   }
 
   @Delete(':id')
+  @ApiOkResponse({ description: 'Usuario eliminado correctamente.' })
   remove(@Param('id') id: string, @ActiveUser() user: UserActiveInterface) {
     return this.tareasService.remove(+id, user);
   }

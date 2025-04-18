@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity } from "typeorm";
+import { Usuario } from "src/usuarios/entities/usuario.entity";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne } from "typeorm";
 
 @Entity()
 export class Tarea {
@@ -21,4 +22,11 @@ export class Tarea {
 
     @Column({ default: false })
     estado: boolean;
+
+    @ManyToOne(() => Usuario)
+    @JoinColumn({ name: 'userEmail', referencedColumnName: 'email' })
+    user: Usuario;
+
+    @Column()
+    userEmail: string;
 }

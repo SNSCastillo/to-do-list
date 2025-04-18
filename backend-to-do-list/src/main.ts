@@ -1,9 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
+  const logger = new Logger("Main");
+
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix("prueba/v1");
   app.useGlobalPipes(
@@ -27,9 +29,12 @@ async function bootstrap() {
     .addTag("Tareas")
     .addTag("Usuarios")
     .build();
+
   const document = SwaggerModule.createDocument(app, config);
+
   SwaggerModule.setup("documentacion", app, document);
 
   await app.listen(process.env.PORT ?? 4000);
+  logger.log(`Documentación con Swagger: ${await app.getUrl()}/documentacion`);
 }
 bootstrap();
