@@ -7,6 +7,7 @@ import { Repository } from 'typeorm';
 import { UserActiveInterface } from 'src/common/interfaces/user-active.interface';
 import { TareasGateway } from './tareas.gateway';
 import { Role } from 'src/common/enums/rol.enum';
+import { UpdateEstadoDto } from './dto/update.estado.dto';
 
 @Injectable()
 export class TareasService {
@@ -54,6 +55,16 @@ export class TareasService {
       userEmail: user.email
     });
     this.tareasGateway.emitirTareaActualizada(updateTareaDto, user);
+    return tareaActualizada;
+  }
+  async updateEstatus(id: number, updateEstadoDto: UpdateEstadoDto, user: UserActiveInterface) {
+    await this.findOne(id, user);
+
+    const tareaActualizada = await this.tareaRepository.update(id, {
+      ...updateEstadoDto,
+      userEmail: user.email
+    });
+    this.tareasGateway.emitirTareaTerminada(updateEstadoDto, user);
     return tareaActualizada;
   }
 

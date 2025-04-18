@@ -1,0 +1,42 @@
+/app
+│
+├── layout.tsx               ← Layout global con AuthProvider
+├── page.tsx                 ← Redirección o home
+│
+├── login/                   ← Página de inicio de sesión
+│   └── page.tsx
+│
+├── todos/                   ← CRUD de tareas (protegido)
+│   └── page.tsx             ← Lista de tareas
+│
+├── api/                     ← Rutas internas si necesitas proxy o helpers
+│   └── tasks/               ← Si decides hacer peticiones internas
+│
+/components
+│
+├── LoginForm.tsx           ← Formulario de login
+├── TaskForm.tsx            ← Crear/editar tareas
+├── TaskItem.tsx            ← Render de una tarea
+├── Navbar.tsx              ← Navbar con logout y saludo
+│
+/context
+│
+├── AuthContext.tsx         ← Manejo global de autenticación
+├── SocketContext.tsx       ← Manejo global de Socket.io
+│
+/lib
+│
+├── auth.ts                 ← Helpers para token, autenticación, etc.
+├── socket.ts               ← Instancia de socket.io client
+│
+/styles
+│
+├── globals.css             ← Estilos globales (TailwindCSS)
+/middleware.ts              ← Protección de rutas opcional
+/tsconfig.json
+/.env                       ← Variables como API_URL
+/next.config.js
+
+
+
+// Se instaló npm install socket.io-client

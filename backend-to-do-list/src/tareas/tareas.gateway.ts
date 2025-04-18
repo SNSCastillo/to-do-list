@@ -52,9 +52,15 @@ export class TareasGateway
     this.logger.log(`Tarea ${tarea} actualizada por: ${user.email}.`);
   }
 
+  emitirTareaTerminada(tarea, user: UserActiveInterface) {
+    this.server.emit('tareaTerminada', tarea);
+    this.loggerGateway.log(`Tarea ${tarea} terminada por: ${user.email}.`);
+    this.logger.log(`Tarea ${tarea} terminadaa por: ${user.email}.`);
+  }
+
   emitirTareaEliminada(id: number, user: UserActiveInterface) {
     this.server.emit('tareaEliminada', { id });
-    this.loggerGateway.log(`Tarea con ${id} eliminada por: ${user.email}`);
-    this.logger.log(`Tarea con ${id} eliminada por: ${user.email}`);
+    this.loggerGateway.log(`Tarea con ID ${id} eliminada por: ${user.email}`);
+    this.logger.log(`Tarea con ID: ${id} eliminada por: ${user.email}`);
   }
 }

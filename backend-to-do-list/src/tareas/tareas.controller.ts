@@ -7,6 +7,7 @@ import { Role } from 'src/common/enums/rol.enum';
 import { UserActiveInterface } from 'src/common/interfaces/user-active.interface';
 import { ActiveUser } from 'src/common/decorators/active-user.decorator';
 import { ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
+import { UpdateEstadoDto } from './dto/update.estado.dto';
 
 @ApiBearerAuth()
 @ApiUnauthorizedResponse({
@@ -43,13 +44,18 @@ export class TareasController {
   }
 
   @Patch(':id')
-  @ApiOkResponse({ description: 'Usuario actualizado correctamente.' })
+  @ApiOkResponse({ description: 'Tarea actualizada correctamente.' })
   update(@Param('id') id: string, @Body() updateTareaDto: UpdateTareaDto, @ActiveUser() user: UserActiveInterface) {
     return this.tareasService.update(+id, updateTareaDto, user);
   }
+  @Patch(':id/estado')
+  @ApiOkResponse({ description: 'Tarea completada.' })
+  updateEstado(@Param('id') id: string, @Body() updateEstadoDto: UpdateEstadoDto, @ActiveUser() user: UserActiveInterface) {
+    return this.tareasService.updateEstatus(+id, updateEstadoDto, user);
+  }
 
   @Delete(':id')
-  @ApiOkResponse({ description: 'Usuario eliminado correctamente.' })
+  @ApiOkResponse({ description: 'Tarea eliminada correctamente.' })
   remove(@Param('id') id: string, @ActiveUser() user: UserActiveInterface) {
     return this.tareasService.remove(+id, user);
   }
