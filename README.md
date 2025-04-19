@@ -34,31 +34,9 @@ cd to-do-list
 ```bash
 docker compose up --build
 ```
-### 3 Crea un archivo init.sql que contenga:
-```SQL
--- Crear la tabla de usuario si no existe
-CREATE TABLE IF NOT EXISTS usuario (
-    id SERIAL PRIMARY KEY,
-    role VARCHAR(50) NOT NULL,
-    deletedAt TIMESTAMP,
-    name VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    password VARCHAR(255)
-);
-
--- Insertar un usuario administrador por defecto
-INSERT INTO usuario (role, name, email, password)
-VALUES 
-    ('admin', 'Juan Pérez', 'juan.perez@example.com', 'password123');
-```
-
-Esto servirá para que se inicialice registrando un usuario y contraseña para loguearse.
-
-### 4. Accede a la aplicación
+### 3. Accede a la aplicación
 
 Una vez que los contenedores estén en funcionamiento, podrás acceder a:
 
 - Frontend (Interfaz de usuario): http://localhost:3000
 - Documentación de la API (Swagger): http://[::1]:4000/documentacion
-
-
