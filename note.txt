@@ -1,2 +1,3 @@
+Uso de socket:
 socket.io-client => Next.js
 socket.io        => Nest.js
