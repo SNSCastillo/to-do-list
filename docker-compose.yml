@@ -28,6 +28,8 @@ services:
       POSTGRES_DATABASE: ${POSTGRES_DATABASE}
       POSTGRES_SSL: false
       JWT_SECRET: ${JWT_SECRET}
+      CORREO: ${CORREO}
+      CORREO_PASSWORD: ${CORREO_PASSWORD}
     ports:
       - "4000:4000"
 
