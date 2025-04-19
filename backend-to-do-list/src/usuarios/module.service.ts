@@ -2,14 +2,15 @@ import { Logger } from '@nestjs/common';
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Usuario } from './entities/usuario.entity';  // Ajusta la ruta según tu archivo de entidad
+import { Usuario } from './entities/usuario.entity';
 import { Role } from 'src/common/enums/rol.enum';
-import { ConfigService } from '@nestjs/config';  // Asegúrate de que ConfigService esté importado correctamente
-import * as bcrypt from 'bcryptjs';  // Importa bcryptjs para el hashing
+import { ConfigService } from '@nestjs/config';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class UserService implements OnModuleInit {
-    private readonly logger = new Logger("Service Especial");
+    private readonly logger = new Logger('Service Especial');
+
     constructor(
         @InjectRepository(Usuario)
         private readonly usuarioRepository: Repository<Usuario>,
@@ -17,20 +18,33 @@ export class UserService implements OnModuleInit {
     ) { }
 
     async onModuleInit() {
-        const email = this.configService.get('CORREO');
-        const emailString = String(email);
-        const userExists = await this.usuarioRepository.findOne({ where: { email: emailString } });
+        try {
+            const email = this.configService.get('CORREO');
+            const passwordEnv = this.configService.get('PASSWORD'); // Obtener la contraseña desde la variable de entorno
 
-        if (!userExists) {
-            const passwordHash = await bcrypt.hash('Reto123', 10);  // 10 es el "salt rounds" de bcrypt
+            if (!email || !passwordEnv) {
+                this.logger.error('Correo o contraseña no está configurado en las variables de entorno.');
+                return;
+            }
 
-            await this.usuarioRepository.save({
-                role: Role.USER,
-                name: String('Blindariesgos'),
-                email: emailString,
-                password: passwordHash,
-            });
-            this.logger.log(`Usuario inicial creado: ${emailString}`);
+            const password = String(passwordEnv);
+
+            const userExists = await this.usuarioRepository.findOne({ where: { email } });
+
+            if (!userExists) {
+                const passwordHash = await bcrypt.hash(password, 10);
+
+                await this.usuarioRepository.save({
+                    role: Role.USER,
+                    name: 'Blindariesgos',
+                    email,
+                    password: passwordHash,
+                });
+
+                this.logger.log(`Usuario inicial creado: ${email}`);
+            }
+        } catch (error) {
+            this.logger.error('Error al crear el usuario inicial', error.stack);
         }
     }
 }
