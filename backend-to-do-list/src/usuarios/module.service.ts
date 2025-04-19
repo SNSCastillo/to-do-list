@@ -1,12 +1,15 @@
+import { Logger } from '@nestjs/common';
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Usuario } from './entities/usuario.entity';  // Adjust the path to your entity
+import { Usuario } from './entities/usuario.entity';  // Ajusta la ruta según tu archivo de entidad
 import { Role } from 'src/common/enums/rol.enum';
-import { ConfigService } from '@nestjs/config';  // You might need to inject ConfigService for config
+import { ConfigService } from '@nestjs/config';  // Asegúrate de que ConfigService esté importado correctamente
+import * as bcrypt from 'bcryptjs';  // Importa bcryptjs para el hashing
 
 @Injectable()
 export class UserService implements OnModuleInit {
+    private readonly logger = new Logger("Service Especial");
     constructor(
         @InjectRepository(Usuario)
         private readonly usuarioRepository: Repository<Usuario>,
@@ -14,18 +17,20 @@ export class UserService implements OnModuleInit {
     ) { }
 
     async onModuleInit() {
-        const email = this.configService.get<string>('COREO');
-
-        const userExists = await this.usuarioRepository.findOne({ where: { email } });
+        const email = this.configService.get('CORREO');
+        const emailString = String(email);
+        const userExists = await this.usuarioRepository.findOne({ where: { email: emailString } });
 
         if (!userExists) {
+            const passwordHash = await bcrypt.hash('Reto123', 10);  // 10 es el "salt rounds" de bcrypt
+
             await this.usuarioRepository.save({
                 role: Role.USER,
-                name: 'Blindariesgos',
-                email: email,
-                password: 'Reto123',
+                name: String('Blindariesgos'),
+                email: emailString,
+                password: passwordHash,
             });
-            console.log('Usuario de prueba insertado.');
+            this.logger.log(`Usuario inicial creado: ${emailString}`);
         }
     }
 }
