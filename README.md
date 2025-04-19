@@ -29,7 +29,7 @@ Primero, clona este repositorio en tu máquina local:
 ```bash
 git clone https://github.com/tu-usuario/to-do-list.git
 cd to-do-list
-
+```
 ### 2. Clona el repositorio
 ```bash
 docker compose up --build
