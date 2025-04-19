@@ -9,7 +9,7 @@ La aplicación permite realizar operaciones CRUD sobre tareas:
 - Leer todas las tareas
 - Actualizar una tarea
 - Eliminar una tarea
-- Cada acción realizada en la app se reflejará en tiempo real tanto en el frontend como en la base de datos.
+- Cada acción realizada en la app se reflejará en tiempo real tanto en el frontend como en la base de datos por medio de websocket.
 
 
 ## 🔧 Requisitos previos
