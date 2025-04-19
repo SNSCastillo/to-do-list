@@ -30,11 +30,12 @@ Primero, clona este repositorio en tu máquina local:
 git clone https://github.com/tu-usuario/to-do-list.git
 cd to-do-list
 ```
-### 2. Construye las imágenes y levanta los contenedores
+### 2. Copia el .env en la raíz del proyecto
+### 3. Construye las imágenes y levanta los contenedores
 ```bash
 docker compose up --build
 ```
-### 3. Accede a la aplicación
+### 4. Accede a la aplicación
 
 Una vez que los contenedores estén en funcionamiento, podrás acceder a:
 
