@@ -30,10 +30,10 @@ Primero, clona este repositorio en tu máquina local:
 git clone https://github.com/tu-usuario/to-do-list.git
 cd to-do-list
 ```
-### 2. Clona el repositorio
+### 2. Construye las imágenes y levanta los contenedores
 ```bash
 docker compose up --build
-
+```
 ### 3 Crea un archivo init.sql que contenga:
 ```SQL
 -- Crear la tabla de usuario si no existe
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS usuario (
 INSERT INTO usuario (role, name, email, password)
 VALUES 
     ('admin', 'Juan Pérez', 'juan.perez@example.com', 'password123');
-
+```
 
 Esto servirá para que se inicialice registrando un usuario y contraseña para loguearse.
 
@@ -58,8 +58,7 @@ Esto servirá para que se inicialice registrando un usuario y contraseña para l
 
 Una vez que los contenedores estén en funcionamiento, podrás acceder a:
 
-Frontend (Interfaz de usuario): http://localhost:3000
-
-Documentación de la API (Swagger): http://[::1]:4000/documentacion
+- Frontend (Interfaz de usuario): http://localhost:3000
+- Documentación de la API (Swagger): http://[::1]:4000/documentacion
 
 
