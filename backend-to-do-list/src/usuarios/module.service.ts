@@ -20,7 +20,7 @@ export class UserService implements OnModuleInit {
     async onModuleInit() {
         try {
             const email = this.configService.get('CORREO');
-            const passwordEnv = this.configService.get('PASSWORD'); // Obtener la contraseña desde la variable de entorno
+            const passwordEnv = this.configService.get('CORREO_PASSWORD'); // Obtener la contraseña desde la variable de entorno
 
             if (!email || !passwordEnv) {
                 this.logger.error('Correo o contraseña no está configurado en las variables de entorno.');
