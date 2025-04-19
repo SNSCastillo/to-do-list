@@ -40,7 +40,7 @@ export default function TaskList() {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            fetchTasks(); // Recarga la lista
+            fetchTasks();
         } catch (err) {
             console.error("Error al eliminar tarea:", err);
         }
@@ -50,7 +50,6 @@ export default function TaskList() {
         fetchTasks();
         // Escuchar nuevas tareas desde el servidor
         socket.on("tareaCreada", (nuevaTarea) => {
-            console.log("Tarea recibida vía socket:", nuevaTarea);
             setTasks((prev) => [nuevaTarea, ...prev]);
         });
 

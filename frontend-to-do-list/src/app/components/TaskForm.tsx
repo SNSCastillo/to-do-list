@@ -64,14 +64,6 @@ export default function TaskForm() {
                 onChange={(e) => setFechaLimite(e.target.value)}
                 className="border border-gray-300 px-3 py-2 rounded w-full"
             />
-            <label className="flex items-center gap-2 border border-gray-300 px-3 py-2 rounded w-full">
-                <input
-                    type="checkbox"
-                    checked={estado}
-                    onChange={(e) => setEstado(e.target.checked)}
-                />
-                ¿Completado?
-            </label>
             <button
                 type="submit"
                 className="bg-blue-600 text-white px-4 py-2 rounded w-full"
