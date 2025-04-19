@@ -1,6 +1,6 @@
 # 🚀 To-Do List App
 
-Bienvenido a **To-Do List**, una aplicación simple y eficiente para gestionar tus tareas. Esta app está construida utilizando **Next.js** para el frontend y **NestJS** para el backend, todo containerizado con **Docker** para facilitar la ejecución.
+Bienvenido a **To-Do List**, una aplicación simple y eficiente para gestionar tus tareas. Construida utilizando **Next.js** para el frontend y **NestJS** para el backend, todo containerizado con **Docker** para facilitar la ejecución.
 
 ##📝 Funcionalidades
 La aplicación permite realizar operaciones CRUD sobre tareas:
