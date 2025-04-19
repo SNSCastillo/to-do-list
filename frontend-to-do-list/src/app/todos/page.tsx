@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "./../context/AuthContext";
@@ -22,7 +24,7 @@ export default function TodosPage() {
     return (
         <div className="min-h-screen p-6 bg-gray-50 text-black">
             <Navbar />
-            <div className="max-w-2xl mx-auto mt-10 space-y-6 text-amber-300">
+            <div className="max-w-2xl mx-auto mt-10 space-y-6 text-cyan-800">
                 <h1 className="text-3xl font-bold">Tus tareas</h1>
                 <TaskForm />
                 <TaskList />

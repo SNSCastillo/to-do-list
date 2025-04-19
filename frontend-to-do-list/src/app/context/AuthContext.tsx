@@ -1,4 +1,3 @@
-// context/AuthContext.tsx
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
@@ -46,8 +45,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             setUser({ email: userEmail });
 
             router.push("/todos");
-        } catch (err: any) {
-            throw new Error(err?.response?.data?.message || "Error al iniciar sesión");
+        } catch (err) {
+            throw new Error("Error al iniciar sesión");
         }
     };
 

@@ -1,3 +1,5 @@
+"use client";
+
 import { useAuth } from "./../context/AuthContext";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -10,7 +12,7 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
         if (!isLoading && (!user || !token)) {
             router.push("/login");
         }
-    }, [user, token, isLoading]);
+    }, [user, token, isLoading, router]);
 
     if (isLoading) {
         return (
